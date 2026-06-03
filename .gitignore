@@ -1,6 +1,7 @@
 node_modules
 dist
 output
+tmp-output
 *.tsbuildinfo
 .DS_Store
 /plan
