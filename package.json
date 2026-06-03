@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Lightweight CLI for crawling documentation sites into Markdown with defuddle",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemnistuley/docrawl.git"
+  },
   "type": "module",
   "bin": {
     "docrawl": "./dist/cli.js"
