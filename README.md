@@ -17,6 +17,26 @@ It is built for static and server-rendered docs sites such as Docusaurus, VitePr
 
 - Node.js `>= 20`
 
+## Install
+
+Run without installing:
+
+```bash
+npx docrawl --help
+```
+
+Install globally:
+
+```bash
+npm install -g docrawl
+```
+
+Then run:
+
+```bash
+docrawl --help
+```
+
 ## Local setup
 
 ```bash
@@ -55,16 +75,16 @@ Examples:
 
 ```bash
 # Crawl a docs section into ./output
-npm run start -- crawl https://docs.example.com/guide/
+docrawl crawl https://docs.example.com/guide/
 
 # Run a smaller smoke test first
-npm run start -- crawl https://docs.example.com/guide/ --max-pages 10 --depth 1 --verbose
+docrawl crawl https://docs.example.com/guide/ --max-pages 10 --depth 1 --verbose
 
 # Merge everything into one file
-npm run start -- crawl https://docs.example.com/guide/ --single-file --output ./context.md
+docrawl crawl https://docs.example.com/guide/ --single-file --output ./context.md
 
 # Crawl the full hostname, not only the seed path subtree
-npm run start -- crawl https://docs.example.com --domain --max-pages 200
+docrawl crawl https://docs.example.com --domain --max-pages 200
 ```
 
 Options:
@@ -94,10 +114,10 @@ Examples:
 
 ```bash
 # Parse one page as Markdown
-npm run start -- parse https://docs.example.com/guide/intro
+docrawl parse https://docs.example.com/guide/intro
 
 # Parse one page as JSON
-npm run start -- parse https://docs.example.com/guide/intro --json
+docrawl parse https://docs.example.com/guide/intro --json
 ```
 
 Options:
@@ -146,7 +166,7 @@ The merged file includes a table of contents and one section per successful page
 Example:
 
 ```bash
-npm run start -- crawl https://docs.example.com --single-file --output ./context.md
+docrawl crawl https://docs.example.com --single-file --output ./context.md
 ```
 
 Produces:
