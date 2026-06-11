@@ -97,7 +97,7 @@ Options:
     --max-pages <n>  Maximum pages to process (default: 500)
     --concurrency <n> Concurrent requests (default: 3)
     --delay <ms>     Delay between requests per worker (default: 500)
-    --lang <code>    Preferred language, BCP 47
+    --lang <code>    Preferred language for extraction, BCP 47
     --no-sitemap     Disable sitemap discovery
     --include <glob> Include URL glob pattern, repeatable
     --exclude <glob> Exclude URL glob pattern, repeatable
@@ -124,8 +124,10 @@ Options:
 
 ```txt
 -j, --json      Output full JSON response
-    --lang <code> Preferred language, BCP 47
+    --lang <code> Preferred language for extraction, BCP 47
 ```
+
+`--lang` is passed to the extraction layer as a preference. It does not currently restrict crawling to URLs or pages of a specific language.
 
 ## Output
 

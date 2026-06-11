@@ -49,7 +49,7 @@ program
   .option('--max-pages <n>', 'Maximum pages to process', parseIntegerOption, 500)
   .option('--concurrency <n>', 'Concurrent requests', parseIntegerOption, 3)
   .option('--delay <ms>', 'Delay between requests per worker', parseIntegerOption, 500)
-  .option('--lang <code>', 'Preferred language, BCP 47')
+  .option('--lang <code>', 'Preferred language for extraction, BCP 47')
   .option('--no-sitemap', 'Disable sitemap discovery')
   .option('--include <glob>', 'Include URL glob pattern', collectRepeatableOption, [])
   .option('--exclude <glob>', 'Exclude URL glob pattern', collectRepeatableOption, [])
@@ -93,7 +93,7 @@ program
   .description('Extract a single page into Markdown or JSON')
   .argument('<url>', 'Single page URL to extract')
   .option('-j, --json', 'Output full JSON response', false)
-  .option('--lang <code>', 'Preferred language, BCP 47')
+  .option('--lang <code>', 'Preferred language for extraction, BCP 47')
   .action(async (url: string, commandOptions: ParseCommandOptions) => {
     validateHttpUrl(url);
 
