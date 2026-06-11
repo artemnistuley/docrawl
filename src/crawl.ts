@@ -185,6 +185,7 @@ async function runWorker(context: CrawlContext): Promise<void> {
     try {
       const pageResult = await processUrl(context, next.url, next.depth);
       context.runtime.results.push(pageResult);
+      logProgress(context, pageResult);
       logVerbose(
         context.options.verbose,
         `[done] ${context.runtime.results.length}/${context.options.maxPages} ${pageResult.status} ${pageResult.finalUrl}`,
@@ -510,4 +511,12 @@ function logVerbose(enabled: boolean, message: string): void {
   }
 
   console.log(message);
+}
+
+function logProgress(context: CrawlContext, result: CrawlPageResult): void {
+  if (context.options.verbose) {
+    return;
+  }
+
+  console.log(`[${context.runtime.results.length}/${context.options.maxPages}] ${result.status} ${result.finalUrl}`);
 }

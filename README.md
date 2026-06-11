@@ -101,8 +101,10 @@ Options:
     --no-sitemap     Disable sitemap discovery
     --include <glob> Include URL glob pattern, repeatable
     --exclude <glob> Exclude URL glob pattern, repeatable
-    --verbose        Verbose progress logging
+    --verbose        Detailed progress logging
 ```
+
+By default, `crawl` prints one compact progress line per completed page. `--verbose` enables more detailed queue, fetch, discovery, and completion logs.
 
 ### `parse`
 
