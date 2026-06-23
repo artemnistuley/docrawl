@@ -1,6 +1,6 @@
 {
   "name": "docrawl",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Lightweight CLI for crawling documentation sites into Markdown with defuddle",
   "license": "MIT",
   "repository": {
