@@ -13,54 +13,18 @@ It is built for static and server-rendered docs sites such as Docusaurus, VitePr
 - feed content into RAG pipelines
 - archive clean docs content without a browser dependency
 
-## Requirements
-
-- Node.js `>= 20`
-
 ## Install
 
-Run without installing:
-
-```bash
-npx docrawl --help
-```
-
-Install globally:
+Requires Node.js >= 20.
 
 ```bash
 npm install -g docrawl
 ```
 
-Then run:
+Or run directly with npx:
 
 ```bash
-docrawl --help
-```
-
-## Local setup
-
-```bash
-npm install
-```
-
-## Development
-
-Build:
-
-```bash
-npm run build
-```
-
-Run the CLI from the project workspace:
-
-```bash
-npm run start -- --help
-```
-
-Run tests:
-
-```bash
-npm test
+npx docrawl crawl https://docs.example.com/guide/
 ```
 
 ## CLI
@@ -191,3 +155,24 @@ context.manifest.json
 - resumable crawls
 - incremental recrawls
 - full navigation reconstruction
+
+## Development
+
+```bash
+git clone https://github.com/artemnistuley/docrawl.git
+cd docrawl
+npm install
+npm run build
+```
+
+Run from source:
+
+```bash
+npm run start -- crawl https://docs.example.com/guide/
+```
+
+Run tests:
+
+```bash
+npm test
+```
