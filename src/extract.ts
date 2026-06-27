@@ -26,6 +26,7 @@ export async function extractPage(
 
   try {
     const { document } = parseHTML(html);
+    sanitizeProtocolRelativeUrls(document, normalizedUrl);
     const canonicalUrl = extractCanonicalUrl(document, normalizedUrl, options.scope);
     const defuddleOptions: {
       markdown: true;
@@ -107,4 +108,45 @@ function extractCanonicalUrl(
 function countWords(content: string): number {
   const words = content.match(/\S+/g);
   return words?.length ?? 0;
+}
+
+const PROTOCOL_RELATIVE_PREFIX = '//';
+
+const META_URL_SELECTORS = [
+  { selector: 'meta[property="og:url"]', attribute: 'content' },
+  { selector: 'meta[property="twitter:url"]', attribute: 'content' },
+  { selector: 'link[rel="canonical"]', attribute: 'href' },
+  { selector: 'link[rel="alternate"]', attribute: 'href' },
+] as const;
+
+export function sanitizeProtocolRelativeUrls(document: Document, pageUrl: string): void {
+  for (const { selector, attribute } of META_URL_SELECTORS) {
+    for (const element of document.querySelectorAll(selector)) {
+      const value = element.getAttribute(attribute);
+      if (value?.startsWith(PROTOCOL_RELATIVE_PREFIX)) {
+        try {
+          element.setAttribute(attribute, new URL(value, pageUrl).href);
+        } catch {
+          // leave malformed URLs unchanged
+        }
+      }
+    }
+  }
+
+  for (const script of document.querySelectorAll('script[type="application/ld+json"]')) {
+    const text = script.textContent;
+    if (!text?.includes(PROTOCOL_RELATIVE_PREFIX)) {
+      continue;
+    }
+
+    try {
+      const data = JSON.parse(text);
+      if (typeof data.url === 'string' && data.url.startsWith(PROTOCOL_RELATIVE_PREFIX)) {
+        data.url = new URL(data.url, pageUrl).href;
+        script.textContent = JSON.stringify(data);
+      }
+    } catch {
+      // leave unparseable JSON-LD unchanged
+    }
+  }
 }
